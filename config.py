@@ -11,3 +11,5 @@ class Config:
     #add a connection timeout 
     CONNECTION_TIMEOUT = int(os.environ.get('CONNECTION_TIMEOUT', '30'))
     HEALTH_CHECK_INTERVAL = int(os.environ.get('HEALTH_CHECK_INTERVAL', '10'))
+
+    #improved more timeout and healthcheck
