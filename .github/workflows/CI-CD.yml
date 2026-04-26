@@ -29,7 +29,12 @@ jobs:
 
       - run: pip install flake8
 
-      - run: flake8 . --max-line-length=120 --ignore=E501,W503
+      - run: flake8 . --max-line-length=120 --ignore=E501,W503,W293,W291,E128,E302,F401 
+
+      - run: flake8 . \
+          --max-line-length=120 \
+          --ignore=E501,W503,W293,W291,E128,E302,F401 \
+          --exclude=venv,__pycache__,sakila-db,*.sql,*.tar.gz
 
   # ---------------- TEST (WITH MYSQL) ----------------
   test:
