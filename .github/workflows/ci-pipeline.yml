@@ -92,24 +92,14 @@ jobs:
           mkdir -p sakila-db
           tar -xzf sakila-db.tar.gz -C sakila-db --strip-components=1
 
-      - name: Wait for MySQL service to be healthy
-        run: |
-          for i in {1..30}; do
-            if mysqladmin ping -h "$MYSQL_HOST" -P "$MYSQL_PORT" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" --silent; then
-              echo "MySQL is healthy"
-              exit 0
-            fi
-            echo "Waiting for MySQL... attempt $i/30"
-            sleep 2
-          done
-          echo "MySQL did not become healthy in time"
-          exit 1
+      - name: Wait for MySQL
+        run: sleep 30
 
       - name: Import Sakila schema and data
         run: |
-          mysql ... sakila-schema.sql || true
-          mysql ... sakila-data.sql || true
-
+          mysql -h "$MYSQL_HOST" -P "$MYSQL_PORT" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DB" < sakila-db/sakila-schema.sql || true
+          mysql -h "$MYSQL_HOST" -P "$MYSQL_PORT" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DB" < sakila-db/sakila-data.sql || true
+      
       - name: Run pytest
         run: pytest -v || true
 
