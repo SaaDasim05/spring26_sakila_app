@@ -48,7 +48,7 @@ jobs:
         run: |
           echo "Slack notification: Deployment to staging successful"
 
-  # ---------------- PRODUCTION ----------------
+  # ---------------- PRODUCTION ------------------
   deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
