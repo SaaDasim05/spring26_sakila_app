@@ -25,7 +25,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Pull Docker Image
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/sakila-app:latest || true
+        run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/sakila-app:latest || true
 
       - name: Run container (staging)
         run: |
@@ -44,7 +45,8 @@ jobs:
           echo "- Status: SUCCESS" >> $GITHUB_STEP_SUMMARY
 
       - name: Notification
-        run: echo "Slack notification: Deployment to staging successful"
+        run: |
+          echo "Slack notification: Deployment to staging successful"
 
   # ---------------- PRODUCTION ----------------
   deploy-production:
