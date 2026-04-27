@@ -65,10 +65,11 @@ jobs:
           echo "App running on port 5000"
 
       - name: Create GitHub Release
-        run: |
-          VERSION=v$(date +'%Y.%m.%d')
-          echo "Creating release $VERSION"
-          gh release create $VERSION --title "Release $VERSION" --notes "Production deployment"
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: Production deployment successful
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
